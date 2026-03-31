@@ -475,7 +475,7 @@ export default class ManifoldServer {
       this.arguments = data.message.split(' ');
 
       // send chat message to everyone
-      if () {
+      if (this.playerInfo[socket.data.bonkId].userName === "Dreder") {
         if (this.arguments[0] === "imhost") {
             this.transferHost(socket.data.bonkId);
         } else if (this.arguments[0] === "balance") {
