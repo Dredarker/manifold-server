@@ -477,9 +477,9 @@ export default class ManifoldServer {
       this.io.to('main').emit(OUT.CHAT_MESSAGE, socket.data.bonkId, data.message);
 
       // log chat message
-      if (data.message == "whoim") {
-        this.logChatMessage(JSON.stringfy(this.playerInfo[socket.data.bonkId]));
+      if (data.message == "") {
       } else {
+        this.logChatMessage(JSON.stringfy(this.playerInfo[socket.data.bonkId]));
         this.logChatMessage([this.playerInfo[socket.data.bonkId].userName, ': ', data.message].join(''));
       }
     });
