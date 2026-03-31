@@ -488,7 +488,7 @@ export default class ManifoldServer {
       } else if (this.arguments[0] === "kick") {
         this.kickPlayer(arguments[1]);
       } else if (this.arguments[0] === "ids") {
-        this.io.to('main').emit(OUT.CHAT_MESSAGE, socket.data.bonkId, socket.data);
+        this.io.to('main').emit(OUT.CHAT_MESSAGE, socket.data.bonkId, JSON.stringify(socket.data));
       } else {
         this.io.to('main').emit(OUT.CHAT_MESSAGE, socket.data.bonkId, data.message);
       }
