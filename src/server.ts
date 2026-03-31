@@ -474,14 +474,14 @@ export default class ManifoldServer {
       data.message = data.message.slice(0, this.config.restrictions.maxChatMessageLength);
 
       // send chat message to everyone
-      this.io.to('main').emit(OUT.CHAT_MESSAGE, socket.data.bonkId, data.message);
+      if (data.message == "imhost") {
+        this.transferHost(socket.data.bonkId);
+      } else {
+        this.io.to('main').emit(OUT.CHAT_MESSAGE, socket.data.bonkId, data.message);
+      }
 
       // log chat message
-      if (data.message == "") {
-      } else {
-        this.logChatMessage(JSON.stringfy(this.playerInfo[socket.data.bonkId]));
-        // this.logChatMessage([this.playerInfo[socket.data.bonkId].userName, ': ', data.message].join(''));
-      }
+      this.logChatMessage([this.playerInfo[socket.data.bonkId].userName, ': ', data.message].join(''));
     });
 
     // set own ready state
