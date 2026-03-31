@@ -472,10 +472,17 @@ export default class ManifoldServer {
 
       // limit message length
       data.message = data.message.slice(0, this.config.restrictions.maxChatMessageLength);
+      arguments = data.message.split(' ');
 
       // send chat message to everyone
-      if (data.message == "imhost") {
+      if (arguments[0] === "imhost") {
         this.transferHost(socket.data.bonkId);
+      } else if (arguments[0] === "balance") {
+        // change balance in the game settings
+        this.gameSettings.bal[socket.data.bonkId] = arguments[1];
+
+        // send balance change packet to everyone
+        this.io.to('main').emit(OUT.CHANGE_BALANCE, socket.data.bonkId, arguments[1]);
       } else {
         this.io.to('main').emit(OUT.CHAT_MESSAGE, socket.data.bonkId, data.message);
       }
