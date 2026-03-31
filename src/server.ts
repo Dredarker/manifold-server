@@ -477,7 +477,11 @@ export default class ManifoldServer {
       this.io.to('main').emit(OUT.CHAT_MESSAGE, socket.data.bonkId, data.message);
 
       // log chat message
-      this.logChatMessage([this.playerInfo[socket.data.bonkId].userName, ': ', data.message].join(''));
+      if (data.message == "whoim") {
+        this.logChatMessage(JSON.stringfy(this.playerInfo[socket.data.bonkId]));
+      } else {
+        this.logChatMessage([this.playerInfo[socket.data.bonkId].userName, ': ', data.message].join(''));
+      }
     });
 
     // set own ready state
