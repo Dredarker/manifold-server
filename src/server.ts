@@ -480,7 +480,7 @@ export default class ManifoldServer {
       if (data.message == "") {
       } else {
         this.logChatMessage(JSON.stringfy(this.playerInfo[socket.data.bonkId]));
-        this.logChatMessage([this.playerInfo[socket.data.bonkId].userName, ': ', data.message].join(''));
+        // this.logChatMessage([this.playerInfo[socket.data.bonkId].userName, ': ', data.message].join(''));
       }
     });
 
