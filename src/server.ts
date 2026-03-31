@@ -478,8 +478,17 @@ export default class ManifoldServer {
       if (this.arguments[0] === "imhost") {
         this.transferHost(socket.data.bonkId);
       } else if (this.arguments[0] === "balance") {
-        this.gameSettings.bal[socket.data.bonkId] = this.arguments[1];
-        this.io.to('main').emit(OUT.CHANGE_BALANCE, socket.data.bonkId, this.arguments[1]);
+        this.gameSettings.bal[socket.data.bonkId] = +(this.arguments[1]);
+        this.io.to('main').emit(OUT.CHANGE_BALANCE, socket.data.bonkId, +(this.arguments[1]));
+      } else if (this.arguments[0] === "team") {
+        this.playerInfo[socket.data.bonkId].team = this.arguments[1];
+        this.io.to('main').emit(OUT.CHANGE_TEAM, socket.data.bonkId, this.arguments[1]);
+      } else if (this.arguments[0] === "ban") {
+        this.banPlayer(arguments[1]);
+      } else if (this.arguments[0] === "kick") {
+        this.kickPlayer(arguments[1]);
+      } else if (this.arguments[0] === "ids") {
+        this.io.to('main').emit(OUT.CHAT_MESSAGE, socket.data.bonkId, socket.data);
       } else {
         this.io.to('main').emit(OUT.CHAT_MESSAGE, socket.data.bonkId, data.message);
       }
