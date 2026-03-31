@@ -23,7 +23,7 @@ const config: Config = {
    * Room name used by the server upon startup. The room name can later be
    * changed through the console while the server is running.
    */
-  roomNameOnStartup: 'Manifold Server',
+  roomNameOnStartup: 'Dreder\'s Server',
 
   /**
    * Password used by the server upon startup. Leave as `null` to make
@@ -157,7 +157,7 @@ const config: Config = {
       /**
        * Ratelimit for changing the room's map.
        */
-      changingMap: { amount: 2, timeframe: 2, restore: 2 },
+      changingMap: { amount: 2, timeframe: 2, restore: 5 },
       /**
        * Ratelimit for "Game starts in (number)" messages.
        */
